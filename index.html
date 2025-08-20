@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexicube - Análise de Notícias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS reescrito e melhorado */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #343a40;
+            --background-color: #f8f9fa;
+            --text-color: #495057;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Seção Principal (Hero) */
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-3px);
+        }
+
+        /* Seção de Gráfico */
+        .graph-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .graph-section h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .graph-section .section-subtitle {
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 50px;
+        }
+
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 25px;
+            height: 250px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .bar {
+            width: 50px;
+            background-color: var(--primary-color);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            position: relative;
+        }
+
+        .bar:nth-child(1) { height: 60%; }
+        .bar:nth-child(2) { height: 80%; }
+        .bar:nth-child(3) { height: 40%; }
+        .bar:nth-child(4) { height: 90%; }
+        .bar:nth-child(5) { height: 70%; }
+        .bar:nth-child(6) { height: 50%; }
+        .bar:nth-child(7) { height: 85%; }
+
+        /* Seção de Funcionalidades */
+        .features {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--background-color);
+        }
+
+        .features h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Animação para o gráfico */
+        @keyframes grow {
+            from { height: 0; }
+        }
+        .bar {
+            animation: grow 1s ease-out forwards;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .cta-button {
+                font-size: 1em;
+            }
+            .logo-text {
+                font-size: 1.5em;
+            }
+            nav ul {
+                display: none;
+            }
+            header .container {
+                justify-content: center;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo-container">
+                <i class="fas fa-cube logo-icon"></i>
+                <h1 class="logo-text">Lexicube</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#funcionalidades">Funcionalidades</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <P>teste DE DIGITAÇÃO </P>
+                <h2>O Poder da Análise de Notícias em Tempo Real</h2>
+                <p>O Lexicube utiliza OLAP e um crawler inteligente para monitorar o cenário midiático, revelando tendências, associações de palavras e insights por categoria, tudo em tempo real.</p>
+                <a href="#" class="cta-button">Começar a Analisar</a>
+            </div>
+        </section>
+
+        <section class="graph-section">
+            <div class="container">
+                <h3>Tendências em Destaque</h3>
+                <p class="section-subtitle">Veja o que está dominando o noticiário agora, com uma visualização simples e direta.</p>
+                <div class="graph-container">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="funcionalidades" class="features">
+            <div class="container">
+                <h3>Como o Lexicube Funciona</h3>
+                <p class="section-subtitle">Descubra as funcionalidades que transformam dados brutos em insights valiosos.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Análise de Tendências</h4>
+                        <p>Identifique rapidamente os temas que estão ganhando força no noticiário, com visualizações claras e intuitivas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Coleta em Tempo Real</h4>
+                        <p>Nosso crawler coleta e processa notícias 24/7, garantindo que você tenha acesso aos dados mais recentes do momento.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h4>Associação de Palavras</h4>
+                        <p>Descubra as conexões e palavras-chave mais relevantes que se repetem em diferentes notícias e artigos.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-list-alt"></i></div>
+                        <h4>Análise por Categoria</h4>
+                        <p>Filtre notícias por categorias específicas (esportes, política, tecnologia) para uma análise mais focada e profunda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Lexicube. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
